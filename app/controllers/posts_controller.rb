@@ -1,9 +1,16 @@
 class PostsController < ApplicationController
 	
-
+before_action :authenticate_user!, except: [:index, :show]
 
 def index
 @posts = Post.all
+end
+
+def destroy
+ @post = Post.find params[:id]
+ @post.destroy
+
+ redirect_to posts_path, :notice => "Your post has been deleted"
 end
 
 
@@ -13,12 +20,12 @@ def show
 end
 
 def new
-	@post = Post.new
+	@post = current_user.posts.build
 end
 
 
 def create
-	@post = Post.new(post_params)
+	@post = current_user.posts.build(post_params)
 	@post.save
 	redirect_to @post
 end

@@ -2,7 +2,9 @@
 
 <p>
   <strong>Text:</strong>
-  <%= @post.text %>
+  <%= @post.text %> <br>
+  <strong>gonderen:</strong>
+  <%= @post.user.email %>
 </p>
 
 <%= link_to 'Back', posts_path %>
