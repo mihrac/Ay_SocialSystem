@@ -1,0 +1,29 @@
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" <%= link_to "Arananyuz.com", root_path %>></a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><%= link_to "Akış", root_path %></li>
+      <li><%= link_to "Oyuncular", users_path %></li>
+      <li><a href="#">Page 2</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <% if user_signed_in? %>
+
+  <li> <%= link_to(small_pic_for(current_user), current_user) %></li>
+  <li> <%= link_to "Çıkış", destroy_user_session_path, method: :delete %></li>
+  <% else %>
+
+      <li><%= link_to "Kayıt Ol", new_user_registration_path %></li>
+      <li><%= link_to "Giriş Yap", new_user_session_path %></li>
+    </ul>
+  </div>
+</nav>
+
+
+
+
+
+
+<% end %>

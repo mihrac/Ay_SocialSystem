@@ -6,11 +6,32 @@ def index
 @posts = Post.all
 end
 
+
 def destroy
  @post = Post.find params[:id]
  @post.destroy
 
  redirect_to posts_path, :notice => "Your post has been deleted"
+end
+
+
+def edit
+	@post = Post.find params[:id]
+	
+
+end
+
+
+def update
+	@post = Post.find params[:id]
+
+	if @post.update(post_params)
+		flash.now[:alert] = "kaydettik"
+		redirect_to @post
+	else
+		flash.now[:alert] = "Yanlış giden bir şeyler var başkan! Kaydedemedik"
+		render :edit
+	end
 end
 
 

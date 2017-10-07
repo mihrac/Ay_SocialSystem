@@ -1,31 +1,42 @@
 
 
-<h1>Posts</h1>
+<div>
+	<div class="media">
 
-<table>
-  <thead>
-    <tr>
-      <th>Gönderi</th>
-      <th>Gönderen</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<p><%= render partial: 'posts/new', locals: {path: {controller: "posts", action: (:create)}} %></p>
+</br>
 
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><%= post.text %></td>
-        <td><%= post.user.email %></td>
-        <td><%= link_to 'Show', post %></td>
-        <% if post.user == current_user %>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+</div>
+<section class="col-md-6">
+<% @posts.each do |post| %>
+
+<div class="media">
+        <div class="media-left">
+          <a href="#">
+            <img class="media-object"><%= link_to(avatar_for(post.user), post.user) %>
+          </a>
+        </div>
+        <div class="media-body">
+          <h4 class="media-heading"><%= post.user.username %> diyor ki;</h4>
+          <p><%= post.text %> </p>
+          <p><a href="#">Replay</a> <a href="#">Share</a> 
+           
+          	 <% if post.user == current_user %>
+          	 <%= link_to 'Edit', edit_post_path(post) %>
+          	 <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+
+
+ <% end %>
+
+
+          </p>
+         
+
+        </div>
         <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      </div>
+      </section>
+      </div>
 
-<br>
 
-<%= link_to 'New Post', new_post_path %>
+
