@@ -2,6 +2,11 @@ class ImagesController < ApplicationController
  before_action :authenticate_user!, except: [:index, :show] 
 
 
+def show
+  @image = Image.find(params[:id])
+  
+end
+
 
  def index
     @images = Image.all
