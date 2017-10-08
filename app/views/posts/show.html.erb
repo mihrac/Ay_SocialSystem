@@ -1,10 +1,16 @@
 <p id="notice"><%= notice %></p>
 
+
 <p>
   <strong>Text:</strong>
   <%= @post.text %> <br>
+  <% if @post.image? %>
+  <div class="photo-img"> <%= image_tag @post.image_url(:medium) %> </div>
+  <% end %>
+
   <strong>gonderen:</strong>
   <%= @post.user.email %>
+
 </p>
 
 <%= link_to 'Back', posts_path %>

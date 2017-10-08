@@ -1,0 +1,63 @@
+<h1>Kategori Ekle</h1>
+
+<%= form_for @image do |f| %>
+
+
+
+<% if @image.errors.any?%>
+		<% @image.errors.full_messages.each do |msg|%>
+
+			<div class="alert alert-danger"> <%= msg %> </div>
+		<% end%>
+	<% end%>
+
+
+
+		
+
+	<div class="form-group"> 
+
+		<%= f.label "Resim İsmi" %>
+		<%= f.text_field :image_title, class: 'form-control' %>
+	</div>
+
+	<div class="form-group"> 
+
+		<%= f.label "Kategori Seçin" %>
+		<%= f.select :category_id, Category.where(catrole: [1]).collect {|x| [x.name, x.id] }, { :include_blank => 'Seçiniz' }, class: 'form-control' %>
+	</div>
+
+	<div class="form-group"> 
+
+		<%= f.label "Resim Açıklaması" %>
+		<%= f.text_area :image_description, class: 'form-control' %>
+	</div>
+
+	<div class="form-group"> 
+
+		<%= f.label "Resim yükle" %>
+		<%= f.file_field :image, class: 'form-control' %>
+	</div>
+
+	
+
+
+
+
+
+
+
+
+	<br>
+	<%= f.submit "Kaydet", class: 'btn btn-primary' %>
+	<%= link_to "Vazgeç", images_path, class: 'btn btn-default' %>
+
+<% end %> 
+
+
+
+
+
+
+
+

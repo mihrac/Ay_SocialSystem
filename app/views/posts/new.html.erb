@@ -1,6 +1,64 @@
+<h1>Gönderi Paylaş</h1>
+
 <%= form_for @post do |f| %>
 
-<%= f.text_area :text %>
-<%= f.submit %>
 
-<% end %>
+
+<% if @post.errors.any?%>
+		<% @post.errors.full_messages.each do |msg|%>
+
+			<div class="alert alert-danger"> <%= msg %> </div>
+		<% end%>
+	<% end%>
+
+
+
+		
+
+
+	<div class="form-group"> 
+
+		<%= f.label "Kategori Seçin" %>
+		<%= f.select :category_id, Category.where(catrole: [2]).collect {|x| [x.name, x.id] }, { :include_blank => 'Seçiniz' }, class: 'form-control' %>
+	</div>
+
+	<div class="form-group"> 
+
+		<%= f.label "Yazı" %>
+		<%= f.text_area :text, class: 'form-control' %>
+	</div>
+
+	<div class="form-group"> 
+
+		<%= f.label "Resim yükle" %>
+		<%= f.file_field :image, class: 'form-control' %>
+	</div>
+
+
+	<br>
+	<%= f.submit "Kaydet", class: 'btn btn-primary' %>
+	<%= link_to "Vazgeç", @post, class: 'btn btn-default' %>
+
+<% end %> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

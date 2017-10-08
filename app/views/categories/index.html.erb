@@ -1,0 +1,36 @@
+
+
+<div>
+	<div class="media">
+
+</div>
+<section class="col-md-6">
+<% @categories.each do |category| %>
+
+<div class="media">
+        <div class="media-left">
+        
+        </div>
+        <div class="media-body">
+          <p><%= category.name %> </p>
+          <p><%= category.catrole %> </p>
+       
+           
+          	 <% if current_user.admin? %>
+          	 <%= link_to 'Edit', edit_category_path(category) %>
+          	 <%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %>
+
+
+ <% else %>
+ <% end %>
+
+
+          </p>
+         
+
+        </div>
+        <% end %>
+      </div>
+      </section>
+      </div>
+

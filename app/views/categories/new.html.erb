@@ -1,0 +1,36 @@
+<h1>Kategori Ekle</h1>
+
+<%= form_for @category do |f| %>
+
+
+
+<% if @category.errors.any?%>
+		<% @category.errors.full_messages.each do |msg|%>
+
+			<div class="alert alert-danger"> <%= msg %> </div>
+		<% end%>
+	<% end%>
+
+
+
+		
+
+	<div class="form-group"> 
+
+		<%= f.label :name %>
+		<%= f.text_field :name, class: 'form-control' %>
+	</div>
+
+	<br>
+	<%= f.submit "Kaydet", class: 'btn btn-primary' %>
+	<%= link_to "Vazgeç", class: 'btn btn-default' %>
+
+<% end %> 
+
+
+
+
+
+
+
+

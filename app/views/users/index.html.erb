@@ -18,7 +18,7 @@
     </div>
     <div id="products" class="row list-group">
         
-        <%= @users.each do |user| %>
+        <% @users.each do |user| %>
         <div class="item  col-xs-4 col-lg-4">
             <div class="thumbnail">
                 <%= image_tag (user.avatar.url(:medium, class: "img-circle img-responsive")) if user.avatar? %>
@@ -30,10 +30,10 @@
                     <div class="row">
                         <div class="col-xs-12 col-md-6">
                             <p class="lead">
-                                $21.000</p>
+                                Oyuncu</p>
                         </div>
                         <div class="col-xs-12 col-md-6">
-                            <a class="btn btn-success" href="http://www.jquery2dotnet.com">Add to cart</a>
+                            <%= link_to "detay", user, class: 'btn btn-info btn-block'  %>
                         </div>
                     </div>
                 </div>

@@ -2,13 +2,14 @@ class PostsController < ApplicationController
 	
 before_action :authenticate_user!, except: [:index, :show]
 
+
 def index
 @posts = Post.all
 end
 
 
 def destroy
- @post = Post.find params[:id]
+ @post = Post.find(params[:id])
  @post.destroy
 
  redirect_to posts_path, :notice => "Your post has been deleted"
@@ -16,14 +17,16 @@ end
 
 
 def edit
-	@post = Post.find params[:id]
+	@post = Post.find(params[:id])
 	
 
 end
 
 
 def update
-	@post = Post.find params[:id]
+	@post = Post.find(params[:id])
+
+	if current_user.admin? or @post.user == current_user
 
 	if @post.update(post_params)
 		flash.now[:alert] = "kaydettik"
@@ -32,6 +35,12 @@ def update
 		flash.now[:alert] = "Yanlış giden bir şeyler var başkan! Kaydedemedik"
 		render :edit
 	end
+
+else
+	flash.now[:alert] = "Oooo birileri yetkileri aşmaya çalışıyor Albayım!"
+
+end
+
 end
 
 
@@ -61,8 +70,10 @@ end
 private
 
 def post_params
-	params.require(:post).permit(:text)
+	params.require(:post).permit(:text, :image, :category_id)
 end
+
+
 
 
 
