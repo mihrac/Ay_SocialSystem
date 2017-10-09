@@ -33,6 +33,7 @@ gem 'mini_magick', '~> 4.8'
 gem 'rspec', '~> 3.4'
 gem 'rmagick', '~> 2.16'
 gem 'autoprefixer-rails'
+gem 'simple_form', '~> 3.2', '>= 3.2.1'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password

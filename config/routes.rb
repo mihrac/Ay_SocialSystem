@@ -4,25 +4,7 @@ Rails.application.routes.draw do
   devise_for :admins
   get "upload" => "images#new", :as => "upload"
 
-  get 'images/new'
-
-  get 'images/create'
-
-  get 'images/destroy'
-
-  get 'images/index'
-
-  get 'categories/new'
-
-  get 'categories/create'
-
-  get 'categories/edit'
-
-  get 'categories/update'
-
-  get 'categories/destroy'
-
-  get 'categories/show'
+  
 
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
@@ -35,6 +17,11 @@ end
  resources :images do
   resources :comments, module: :posts
 end
+
+
+  resources :comments do
+    resources :comments
+  end
 
 
 resources :categories 

@@ -11,12 +11,32 @@
   <strong>gonderen:</strong>
   <%= @post.user.email %>
 
+  <%= form_for [@post, Comment.new] do |f| %>
+	<div class="form-group"> 
+
+		
+		<%= f.text_area :body, class: 'form-control', row:'2', style: "min-width: 20%"  %>
+	</div>
+
+<%= f.submit "Gönder", class: 'btn btn-primary' %>
+
+
+<% end %>
+
 </p>
+
+
+
+
+
+
+<ul>
+  <%= render(partial: 'comments/comment', collection: @post.comments) %>
+</ul>
+
 
 <%= link_to 'Back', posts_path %>
 
 
-<%= render partial: "comments/comments", locals: {commentable: @post} %>
-<%= render partial: "comments/form", locals: {commentable: @post} %>
 
 
