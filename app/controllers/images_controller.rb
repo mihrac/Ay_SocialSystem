@@ -23,6 +23,7 @@ end
 
     if @image.save
       flash[:notice] = "Resim Kaydedildi."
+      redirect_to @image
     else
      flash[:notice] = "Bilinmeyen Bir Nedenle, Resminiz Kaydedilemedi."
       render 'new'
@@ -52,13 +53,6 @@ def image_params
 end
 
 
-def postimg_params
-
-  params.require(:image).permit(:image, :category_id, :post_id)
-
-
-  
-end
 
 
 

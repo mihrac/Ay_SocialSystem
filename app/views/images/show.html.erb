@@ -20,7 +20,19 @@
 
 
 		
-	</div>	
+	</div>
+	 <%= form_for [@image, Comment.new] do |f| %>
+	<div class="form-group"> 
 
-	<%= render partial: "comments/comments", locals: {commentable: @image} %>
-	<%= render partial: "comments/form", locals: {commentable: @image} %>
+		
+		<%= f.text_area :body, class: 'form-control', row:'2', style: "min-width: 20%"  %>
+	</div>
+
+<%= f.submit "Gönder", class: 'btn btn-primary' %>
+
+
+<% end %>	
+
+	<ul>
+  <%= render(partial: 'comments/comment', collection: @image.comments) %>
+</ul>

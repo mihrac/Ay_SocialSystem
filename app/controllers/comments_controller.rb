@@ -19,5 +19,6 @@ class CommentsController < ApplicationController
          def find_commentable
       @commentable = Comment.find_by_id(params[:comment_id]) if params[:comment_id]
       @commentable = Post.find_by_id(params[:post_id]) if params[:post_id]
+      @commentable = Image.find_by_id(params[:image_id]) if params[:image_id]
     end
 end

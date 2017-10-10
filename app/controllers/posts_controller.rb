@@ -29,7 +29,7 @@ def update
 	if current_user.admin? or @post.user == current_user
 
 	if @post.update(post_params)
-		flash.now[:alert] = "kaydettik"
+		flash.now[:notice] = "kaydettik"
 		redirect_to @post
 	else
 		flash.now[:alert] = "Yanlış giden bir şeyler var başkan! Kaydedemedik"
@@ -56,8 +56,14 @@ end
 
 def create
 	@post = current_user.posts.build(post_params)
-	@post.save
-	redirect_to @post
+
+	if @post.save
+		flash.now[:notice] = "kaydettik"
+	else
+	flash.now[:alert] = "Kaydedemedik"
+	end
+
+	redirect_to posts_path
 end
 
 

@@ -20,7 +20,7 @@
           <% if post.image? %>
   <div class="photo-img"> <%= image_tag post.image_url(:thumb) %> </div>
   <% end %>
-          <h4 class="media-heading"><%= post.user.username %> diyor ki;</h4>
+          <h4 class="media-heading"><%= link_to post.user.username, post %> diyor ki;</h4>
           <p><%= post.text %> </p>
           <p><a href="#">Replay</a> <a href="#">Share</a> 
            
