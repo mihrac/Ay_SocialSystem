@@ -19,6 +19,39 @@
     <div id="products" class="row list-group">
         
         <% @users.each do |user| %>
+       <% if !user_signed_in? %>
+ <div class="item  col-xs-4 col-lg-4">
+            <div class="thumbnail">
+                <%= image_tag (user.avatar.url(:medium, class: "img-circle img-responsive")) if user.avatar? %>
+                <div class="caption">
+                    <h4 class="group inner list-group-item-heading">
+                        <%= "#{user.name}  #{user.lastname}" %></h4>
+                    <p class="group inner list-group-item-text">
+                        <%= user.about %></p>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <p class="lead">
+                                Oyuncu</p>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <%= link_to "detay", user, class: 'btn btn-info btn-block'  %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+<% else %>
+
+        <%  if current_user.blocking?(user) %>
+<!-- Engellenmişsen-->
+
+    <center> <p><strong>  Bu Üyenin içeriğine ulaşılamıyor</strong>  <%= link_to "Anasayfaya Dön", posts_path, class: 'btn btn-info btn-block'  %> </p> </center>
+
+
+
+
+                     <% else %>
         <div class="item  col-xs-4 col-lg-4">
             <div class="thumbnail">
                 <%= image_tag (user.avatar.url(:medium, class: "img-circle img-responsive")) if user.avatar? %>
@@ -40,6 +73,8 @@
             </div>
             
         </div>
+        <% end %>
+        <% end %>
         <% end %>
       
     </div>

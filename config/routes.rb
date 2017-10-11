@@ -17,6 +17,12 @@ resources :users do
 	end
 end
 
+resources :users do
+  member do
+    get :blocking, :blockers
+  end
+end
+
 
 
 resources :posts do
@@ -34,9 +40,10 @@ end
   end
 
 resources :relationships
+resources :blockingships
 resources :categories 
 
 
-root 'images#index'
+root 'posts#index'
 
 end

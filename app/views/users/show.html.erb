@@ -5,6 +5,23 @@
     	 <div class="well profile">
             <div class="col-sm-12">
                 <div class="col-xs-12 col-sm-8">
+
+
+                    <!-- Engellenmişsen-->
+                    <%  if current_user.blocking?(@user) %>
+                    <!-- Engellenmişsen-->
+
+                     <center> <p><strong>  Bu Üyenin içeriğine ulaşılamıyor</strong>  <%= link_to "Anasayfaya Dön", posts_path, class: 'btn btn-info btn-block'  %> </p> </center>
+
+
+
+
+                     <% else %>
+                     
+
+
+
+
                 	<% if @user.name? %>
                     <h2><%= @user.name + "  " + @user.lastname %></h2>
                     
@@ -54,7 +71,9 @@
                     <%= link_to "Düzenle", edit_user_registration_path(@user), class: 'btn btn-info btn-block'  %>
                  <% else %>
                  
-                    <%= render '/components/follow_button/', user: User.find_by(username: :username) %> 
+                    <%= render '/components/block_button/', user: User.find_by(username: :username) %> 
+
+
                        <% end %>
                   
 
@@ -66,7 +85,7 @@
                 <div class="col-xs-12 col-sm-4 emphasis">
                     <h2><strong><%= @user.following.count %></strong></h2>                    
                     <p><small>Takip</small></p>
-                    <button class="btn btn-info btn-block"><span class="fa fa-user"></span> View Profile </button>
+                    <div><%= render '/components/follow_button/', user: User.find_by(username: :username) %> </div>
                 </div>
                 <div class="col-xs-12 col-sm-4 emphasis">
                     <h2><strong><%= @user.posts.count %></strong></h2>                    
@@ -113,3 +132,6 @@
 
 
 
+
+
+<% end %>

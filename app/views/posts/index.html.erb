@@ -3,43 +3,93 @@
 <div>
 	<div class="media">
 
-<p><%= render partial: 'posts/new', locals: {path: {controller: "posts", action: (:create)}} %></p>
-</br>
+    <p><%= render partial: 'posts/new', locals: {path: {controller: "posts", action: (:create)}} %></p>
+  </br>
 
 </div>
 <section class="col-md-6">
-<% @posts.each do |post| %>
+ <!-- Engellenmişsen-->
+ 
 
-<div class="media">
-        <div class="media-left">
-          <a href="#">
-            <img class="media-object"><%= link_to(avatar_for(post.user), post.user) %>
-          </a>
-        </div>
-        <div class="media-body">
-          <% if post.image? %>
-  <div class="photo-img"> <%= image_tag post.image_url(:thumb) %> </div>
+
+
+
+ 
+ <% @posts.each do |post| %>
+
+ <% if !user_signed_in? %>
+
+
+
+ <div class="media">
+  <div class="media-left">
+    <a href="#">
+      <img class="media-object"><%= link_to(avatar_for(post.user), post.user) %>
+    </a>
+  </div>
+  <div class="media-body">
+    <% if post.image? %>
+    <div class="photo-img"> <%= image_tag post.image_url(:thumb) %> </div>
+    <% end %>
+    <h4 class="media-heading"><%= link_to post.user.username, post %> diyor ki;</h4>
+    <p><%= post.text %> </p>
+    <p><a href="#">Replay</a> <a href="#">Share</a> 
+     
+      <% if post.user == current_user %>
+      <%= link_to 'Edit', edit_post_path(post) %>
+      <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+
+
+      <% end %>
+
+
+    </p>
+    
+
+  </div>
+ 
+</div>
+
+
+ <% else %>
+
+
+ <%  if current_user.blocking?(post.user) %>
+ <!-- Engellenmişsen veya engellemişsen-->
+ <% else %>
+
+ <div class="media">
+  <div class="media-left">
+    <a href="#">
+      <img class="media-object"><%= link_to(avatar_for(post.user), post.user) %>
+    </a>
+  </div>
+  <div class="media-body">
+    <% if post.image? %>
+    <div class="photo-img"> <%= image_tag post.image_url(:thumb) %> </div>
+    <% end %>
+    <h4 class="media-heading"><%= link_to post.user.username, post %> diyor ki;</h4>
+    <p><%= post.text %> </p>
+    <p><a href="#">Replay</a> <a href="#">Share</a> 
+     
+      <% if post.user == current_user %>
+      <%= link_to 'Edit', edit_post_path(post) %>
+      <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+
+
+      <% end %>
+
+
+    </p>
+    
+
+  </div>
   <% end %>
-          <h4 class="media-heading"><%= link_to post.user.username, post %> diyor ki;</h4>
-          <p><%= post.text %> </p>
-          <p><a href="#">Replay</a> <a href="#">Share</a> 
-           
-          	 <% if post.user == current_user %>
-          	 <%= link_to 'Edit', edit_post_path(post) %>
-          	 <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+</div>
+<% end %>
+<% end %>
 
-
- <% end %>
-
-
-          </p>
-         
-
-        </div>
-        <% end %>
-      </div>
-      </section>
-      </div>
-
+</section>
+</div>
 
 

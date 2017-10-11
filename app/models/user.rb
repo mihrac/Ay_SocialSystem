@@ -12,10 +12,18 @@ class User < ApplicationRecord
          has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
          has_many :passive_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
 
+         has_many :active_blockingships, class_name: "Blockingship", foreign_key: "blocker_id", dependent: :destroy
+         has_many :passive_blockingships, class_name: "Blockingships", foreign_key: "blocked_id", dependent: :destroy
+
          has_many :following, through: :active_relationships, source: :followed
          has_many :followers, through: :passive_relationships, source: :follower
 
+         has_many :blocking, through: :active_blockingships, source: :blocked
+         has_many :blockers, through: :passive_blockingships, source: :blocker
 
+
+
+#follow methodları
 
          
          def follow(other)
@@ -30,6 +38,18 @@ class User < ApplicationRecord
          	following.include?(other)
          end
 
+#Block methodları
+         def block(other)
+         	active_blockingships.create(blocked_id: other.id)
+         end
+
+         def unblock(other)
+         	active_blockingships.find_by(blocked_id: other.id).destroy
+         end
+
+         def blocking?(other)
+         	blocking.include?(other)
+         end
 
 
 
