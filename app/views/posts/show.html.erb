@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-    <% if !user_signed_in? %>
+    <% if user_signed_in? %>
 
 <p>
   <strong>Text:</strong>
@@ -83,6 +83,15 @@
 
 <%= link_to 'Back', posts_path %>
 <% end %>
+
+
+
+<% else %>
+
+
+Henüz Giriş Yapmadığınız için bir şey göremezsiniz cınım!
+
+
 <% end %>
 
 

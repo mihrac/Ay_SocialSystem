@@ -9,29 +9,13 @@
 	<div class="row">
 		
 		<% @images.each do |image|    %>
-<% if !user_signed_in? %>
-<div class="col-md-3" >
-			<div class="photo photo-type-line">
-				<a href="<%= image_path %>" class="photo-hover" data-lightbox="my-images" data-title="<%= image.image_title %>" >
-					<div class="photo-info">
-						<div class="headline"><%= image.user.username %> (<%= image.user.images.size.to_i %>) </div>
-						<div class="headline"> <%= image.image_title %> </div>
-						<div class="line"></div>
-						<div class="headline"> <%= image.image_description %> </div>
-					</div>
-					<div class="mask"></div>
-				</a>
-				<div class="photo-img"> <%= image_tag image.image_url(:thumb) %> </div>
-			</div>
-		</div>
-
-<% else %>
-		<%  if current_user.blocking?(image.user) %>
+<% if user_signed_in? %>
+<%  if current_user.blocking?(image.user) %>
 		<!-- Engellenmişsen veya engellemişsen-->
 		<% else %>
 		<div class="col-md-3" >
 			<div class="photo photo-type-line">
-				<a href="<%= image.image_url() %>" class="photo-hover" data-lightbox="my-images" data-title="<%= image.image_title %>" >
+				
 					<div class="photo-info">
 						<div class="headline"><%= image.user.username %> (<%= image.user.images.size.to_i %>) </div>
 						<div class="headline"> <%= image.image_title %> </div>
@@ -39,12 +23,30 @@
 						<div class="headline"> <%= image.image_description %> </div>
 					</div>
 					<div class="mask"></div>
-				</a>
+				
 				<div class="photo-img"> <%= image_tag image.image_url(:thumb) %> </div>
 			</div>
 		</div>
 		<% end %>
 	</div>	
+
+
+<% else %>
+<div class="col-md-3" >
+			<div class="photo photo-type-line">
+				
+					<div class="photo-info">
+						<div class="headline"><%= image.user.username %> (<%= image.user.images.size.to_i %>) </div>
+						<div class="headline"> <%= image.image_title %> </div>
+						<div class="line"></div>
+						<div class="headline"> <%= image.image_description %> </div>
+					</div>
+					<div class="mask"></div>
+				
+				<div class="photo-img"> <%= image_tag image.image_url(:thumb) %> </div>
+			</div>
+		</div>
+		
 	<% end %>
 	<% end %>
 	<% end %>

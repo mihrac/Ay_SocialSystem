@@ -20,6 +20,11 @@ class User < ApplicationRecord
 
          has_many :blocking, through: :active_blockingships, source: :blocked
          has_many :blockers, through: :passive_blockingships, source: :blocker
+#messaging assocation / mesaj atamaları:
+         has_many :authored_conversations, class_name: 'Conversation', foreign_key: 'author_id'
+         has_many :received_conversations, class_name: 'Conversation', foreign_key: 'received_id'
+         has_many :personal_messages, dependent: :destroy
+
 
 
 
@@ -49,7 +54,18 @@ class User < ApplicationRecord
 
          def blocking?(other)
          	blocking.include?(other)
+
          end
+
+
+
+
+         #meessaging sets
+
+
+        # def name
+  #email.split('@')[0]
+#end
 
 
 

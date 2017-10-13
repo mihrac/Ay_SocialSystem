@@ -1,86 +1,58 @@
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
 
 
-<div class="container">
-    <div class="well well-sm">
-        <strong>Display</strong>
-        <div class="btn-group">
-            <a href="#" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list">
-            </span>List</a> <a href="#" id="grid" class="btn btn-default btn-sm"><span
-                class="glyphicon glyphicon-th"></span>Grid</a>
-        </div>
-    </div>
-    <div id="products" class="row list-group">
+
+
+
+  
         
         <% @users.each do |user| %>
        <% if !user_signed_in? %>
- <div class="item  col-xs-4 col-lg-4">
-            <div class="thumbnail">
+ 
+           
                 <%= image_tag (user.avatar.url(:medium, class: "img-circle img-responsive")) if user.avatar? %>
-                <div class="caption">
-                    <h4 class="group inner list-group-item-heading">
-                        <%= "#{user.name}  #{user.lastname}" %></h4>
-                    <p class="group inner list-group-item-text">
-                        <%= user.about %></p>
-                    <div class="row">
-                        <div class="col-xs-12 col-md-6">
-                            <p class="lead">
-                                Oyuncu</p>
-                        </div>
-                        <div class="col-xs-12 col-md-6">
+               
+                    
+                        <%= user.name + " " + user.lastname %>
+                        <%= user.about %>
+                  
+                        
                             <%= link_to "detay", user, class: 'btn btn-info btn-block'  %>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-        </div>
+          
 <% else %>
 
         <%  if current_user.blocking?(user) %>
 <!-- Engellenmişsen-->
 
-    <center> <p><strong>  Bu Üyenin içeriğine ulaşılamıyor</strong>  <%= link_to "Anasayfaya Dön", posts_path, class: 'btn btn-info btn-block'  %> </p> </center>
+    <center> <p><strong>  Bu Üyenin içeriğine ulaşılamıyor</strong>  </p> </center>
 
 
 
 
                      <% else %>
-        <div class="item  col-xs-4 col-lg-4">
-            <div class="thumbnail">
+        
                 <%= image_tag (user.avatar.url(:medium, class: "img-circle img-responsive")) if user.avatar? %>
-                <div class="caption">
-                    <h4 class="group inner list-group-item-heading">
-                        <%= "#{user.name}  #{user.lastname}" %></h4>
-                    <p class="group inner list-group-item-text">
+                
+                        <%= "#{user.name}  #{user.lastname}"  %><%= link_to 'send a message', new_personal_message_path(receiver_id: user) %></h4>
+                   
                         <%= user.about %></p>
-                    <div class="row">
-                        <div class="col-xs-12 col-md-6">
-                            <p class="lead">
-                                Oyuncu</p>
-                        </div>
-                        <div class="col-xs-12 col-md-6">
+                    
+                        
+                            
+                                
+                       
+                        
                             <%= link_to "detay", user, class: 'btn btn-info btn-block'  %>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                       
             
-        </div>
+        
         <% end %>
         <% end %>
         <% end %>
       
-    </div>
-</div>
+   
 
 
 
-</body>
-</html>
+
+
